@@ -1,0 +1,39 @@
+﻿  Main.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(37,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(38,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(39,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(41,38): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(41,35): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(41,32): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(50,44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(50,33): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(56,46): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(56,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(80,34): warning C4244: 'initializing': conversion from '_Rep' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Rep=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(84,25): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(85,25): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(86,25): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(139,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(146,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(146,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe
