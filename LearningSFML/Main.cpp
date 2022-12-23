@@ -1,7 +1,7 @@
 #include <random>
-#include <chrono>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Entity.h"
 
 double randomnumber() {
     // Making rng static ensures that it stays the same
@@ -11,102 +11,6 @@ double randomnumber() {
     std::uniform_real_distribution<double> dist(-1.0, 1.0);
     return dist(rng);
 }
-
-class Entity
-{
-private:
-    sf::RectangleShape rectangle;
-    sf::Vector2f position;
-    sf::Vector2f size;
-
-    sf::Vector2f velocity;
-
-    sf::Color startColor;
-    sf::Color endColor;
-
-    bool isActive = false;
-    float lifeTime = 2.0f; // seconds
-    std::chrono::time_point<std::chrono::steady_clock> spawnTime;
-
-public:
-    Entity()
-    {
-        position = sf::Vector2f(0, 0);        
-        size = sf::Vector2f(50, 50);
-
-        float r = std::abs(255 * randomnumber());
-        float g = std::abs(255 * randomnumber());
-        float b = std::abs(255 * randomnumber());
-
-        startColor = sf::Color(r, g, b);
-        endColor = sf::Color::Black;
-        
-        rectangle.setSize(size);
-        rectangle.setFillColor(startColor);
-    }
-
-    void SetPosition(int xVelocity, int yVelocity)
-    {
-        position = sf::Vector2f(xVelocity, yVelocity);
-        rectangle.setPosition(position);
-    }
-
-    void SetSize(int size)
-    {
-        rectangle.setSize(sf::Vector2f(size, size));
-    }
-
-    void SetVelocity(float xVelocity, float yVelocity)
-    {
-        velocity = sf::Vector2f(xVelocity, yVelocity);
-    }
-
-    void Update()
-    {
-        if (isActive)
-        {
-            auto currentTime = std::chrono::high_resolution_clock::now();
-
-            std::chrono::duration<float> duration = (currentTime - spawnTime);
-
-            float newX = position.x + velocity.x;
-            float newY = position.y + velocity.y;
-
-            position = sf::Vector2f(newX, newY);
-            rectangle.setPosition(position);
-
-            auto dc = duration.count();
-
-            sf::Uint8 multiplier = (duration.count() / lifeTime);
-
-            sf::Color fillColor = rectangle.getFillColor();
-
-            sf::Uint8 r = (endColor.r - fillColor.r) * 0.05 + fillColor.r;
-            sf::Uint8 g = (endColor.g - fillColor.g) * 0.05 + fillColor.g;
-            sf::Uint8 b = (endColor.b - fillColor.b) * 0.05 + fillColor.b;
-
-            sf::Color c(r, g, b, 255);
-
-            rectangle.setFillColor(c);
-        }
-    }
-
-    void SetActive()
-    {
-        rectangle.setFillColor(startColor);
-        spawnTime = std::chrono::high_resolution_clock::now();
-        
-        isActive = true;
-    }
-
-    void Draw(sf::RenderWindow& window)
-    {
-        if (isActive)
-        {
-            window.draw(rectangle);
-        }
-    }
-};
 
 int main()
 {
@@ -137,14 +41,13 @@ int main()
                 if (std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
                 {
                     int size = std::abs(50 * randomnumber());
+                    
+                    int xPos = mousePosition.x - size / 2;
+                    int yPos = mousePosition.y - size / 2;
+                    float xVelocity = 10 * randomnumber();
+                    float yVelocity = 10 * randomnumber();
 
-                    int x = mousePosition.x - size / 2;
-                    int y = mousePosition.y - size / 2;
-
-                    entities[currentEntity].SetSize(size);
-                    entities[currentEntity].SetPosition(x, y);
-                    entities[currentEntity].SetVelocity(10 * randomnumber(), 10 * randomnumber());
-                    entities[currentEntity].SetActive();
+                    entities[currentEntity].Spawn(xPos, yPos, size, xVelocity, yVelocity);
 
                     currentEntity = currentEntity++ % 9;
 
