@@ -12,6 +12,43 @@ double randomnumber() {
     return dist(rng);
 }
 
+class ParticleSystem
+{
+    Entity entities[20];
+    int nextSpawnIndex = 0;
+
+public:
+    void Spawn(sf::Vector2i position)
+    {
+        int size = std::abs(50 * randomnumber());
+
+        int xPos = position.x - size / 2;
+        int yPos = position.y - size / 2;
+        float xVelocity = 10 * randomnumber();
+        float yVelocity = 10 * randomnumber();
+
+        entities[nextSpawnIndex].Spawn(xPos, yPos, size, xVelocity, yVelocity);
+
+        nextSpawnIndex = nextSpawnIndex++ % 19;
+    }
+
+    void Update()
+    {
+        for (Entity& e : entities)
+        {
+            e.Update();
+        }
+    }
+
+    void Draw(sf::RenderWindow& window)
+    {
+        for (int i = sizeof(entities) / sizeof(Entity) - 1; i >= 0; i--)
+        {
+            entities[i].Draw(window);
+        }
+    }
+};
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Square");
@@ -19,9 +56,7 @@ int main()
 
     sf::Event event;
 
-    Entity entities[20];
-
-    int currentEntity = 0;
+    ParticleSystem particleSystem;
 
     sf::Vector2i lastSpawnPosition;
 
@@ -40,33 +75,18 @@ int main()
 
                 if (std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
                 {
-                    int size = std::abs(50 * randomnumber());
-                    
-                    int xPos = mousePosition.x - size / 2;
-                    int yPos = mousePosition.y - size / 2;
-                    float xVelocity = 10 * randomnumber();
-                    float yVelocity = 10 * randomnumber();
-
-                    entities[currentEntity].Spawn(xPos, yPos, size, xVelocity, yVelocity);
-
-                    currentEntity = currentEntity++ % 9;
+                    particleSystem.Spawn(mousePosition);
 
                     lastSpawnPosition = mousePosition;
                 }
             }
         }
 
-        for (Entity& e : entities)
-        {
-            e.Update();
-        }
+        particleSystem.Update();
 
         window.clear();
 
-        for (int i = sizeof(entities) / sizeof(Entity) - 1; i >= 0; i--)
-        {
-            entities[i].Draw(window);
-        }
+        particleSystem.Draw(window);
 
         window.display();
     }

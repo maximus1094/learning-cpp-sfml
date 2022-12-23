@@ -28,8 +28,8 @@ C:\Workspaces\cpp\LearningSFML\LearningSFML\Entity.cpp(53,21): warning C4244: 'i
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Entity.cpp(54,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Entity.cpp(55,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
   Main.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(43,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(47,37): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(48,37): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(23,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(27,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(28,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Generating Code...
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe
