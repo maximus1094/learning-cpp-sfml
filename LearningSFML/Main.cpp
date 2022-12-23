@@ -1,7 +1,10 @@
 #include <random>
 #include <iostream>
+#include <vector>
 #include <SFML/Graphics.hpp>
+
 #include "Entity.h"
+#include "Collider.h"
 
 double randomnumber() {
     // Making rng static ensures that it stays the same
@@ -17,6 +20,8 @@ class ParticleSystem
     Entity entities[20];
     int nextSpawnIndex = 0;
 
+    std::vector<Collider> collidersOther;
+
 public:
     void Spawn(sf::Vector2i position)
     {
@@ -29,14 +34,14 @@ public:
 
         entities[nextSpawnIndex].Spawn(xPos, yPos, size, xVelocity, yVelocity);
 
-        nextSpawnIndex = nextSpawnIndex++ % 19;
+        nextSpawnIndex = nextSpawnIndex++ % ((sizeof(entities) / sizeof(Entity)) - 1);
     }
 
     void Update()
     {
         for (Entity& e : entities)
         {
-            e.Update();
+            e.Update(collidersOther);
         }
     }
 
@@ -47,6 +52,11 @@ public:
             entities[i].Draw(window);
         }
     }
+
+    void AddCollider(Collider& otherCollider)
+    {
+        collidersOther.push_back(otherCollider);
+    }
 };
 
 int main()
@@ -56,7 +66,20 @@ int main()
 
     sf::Event event;
 
+    // compoments to draw
     ParticleSystem particleSystem;
+    
+    int boxSize = 120;
+    sf::RectangleShape box;
+    box.setSize(sf::Vector2f(boxSize, boxSize));
+    box.setFillColor(sf::Color::White);
+    box.setOutlineColor(sf::Color(200, 200, 200, 255));
+    box.setOutlineThickness(1);
+    box.setPosition(sf::Vector2f(800 / 2 - boxSize / 2, 600 / 2 - boxSize / 2));
+    
+    Collider boxCollider(box);
+
+    particleSystem.AddCollider(boxCollider);
 
     sf::Vector2i lastSpawnPosition;
 
@@ -84,9 +107,11 @@ int main()
 
         particleSystem.Update();
 
-        window.clear();
+        window.clear(sf::Color::White);
 
         particleSystem.Draw(window);
+
+        window.draw(box);
 
         window.display();
     }

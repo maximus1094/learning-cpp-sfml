@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
+
 #include "Entity.h"
 
 Entity::Entity()
@@ -11,7 +12,7 @@ Entity::Entity()
     size = sf::Vector2f(50, 50);
 
     startColor = sf::Color(255, 165, 0);
-    endColor = sf::Color::Black;
+    endColor = sf::Color::White;
 
     rectangle.setSize(size);
     rectangle.setFillColor(startColor);
@@ -30,7 +31,7 @@ void Entity::Spawn(int xPosition, int yPosition, int size, float xVelocity, floa
     isActive = true;
 }
 
-void Entity::Update()
+void Entity::Update(std::vector<Collider> collidersOther)
 {
     if (isActive)
     {
@@ -43,6 +44,61 @@ void Entity::Update()
 
         position = sf::Vector2f(newX, newY);
         rectangle.setPosition(position);
+
+        bool collided = false;
+        for (Collider& c : collidersOther)
+        {
+            // x: 340, 460, y: 240, 360
+
+            if (velocity.x > 0 &&
+                // crossing x moving right
+                position.x + size.x > c.xPosition &&
+                position.x < c.xPosition &&
+                
+                // within y bounds
+                position.y + size.y > c.yPosition &&
+                position.y < c.yPosition + c.size ||
+                
+                velocity.x < 0 &&
+                // crossing x moving left
+                position.x < c.xPosition + c.size &&
+                position.x + size.x > c.xPosition + c.size &&
+                
+                // within y bounds
+                position.y + size.y > c.yPosition&&
+                position.y < c.yPosition + c.size)
+            {
+                velocity.x *= -1;
+                collided = true;
+            }
+
+            if (velocity.y > 0 &&
+                // crossing y moving bottom
+                position.y + size.y > c.yPosition &&
+                position.y < c.yPosition &&
+
+                // within x bounds
+                position.x + size.x > c.xPosition &&
+                position.x < c.xPosition + c.size ||
+
+                velocity.y < 0 &&
+                // crossing y moving top
+                position.y < c.yPosition + c.size &&
+                position.y + size.y > c.yPosition + c.size &&
+
+                // within x bounds
+                position.x + size.x > c.xPosition &&
+                position.x < c.xPosition + c.size)
+            {
+                velocity.y *= -1;
+                collided = true;
+            }
+
+            if (collided)
+            {
+                break;
+            }
+        }
 
         auto dc = duration.count();
 

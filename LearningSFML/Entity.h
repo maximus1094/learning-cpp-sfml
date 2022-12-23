@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <chrono>
+#include <vector>
+
+#include "Collider.h"
 
 class Entity
 {
@@ -23,6 +26,6 @@ public:
     Entity();
 
     void Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity);
-    void Update();
+    void Update(std::vector<Collider> collidersOther);
     void Draw(sf::RenderWindow& window);
 };
