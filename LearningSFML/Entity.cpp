@@ -11,7 +11,7 @@ Entity::Entity()
     position = sf::Vector2f(0, 0);
     size = sf::Vector2f(50, 50);
 
-    startColor = sf::Color(255, 165, 0);
+    startColor = sf::Color(0, 230, 118);
     endColor = sf::Color::White;
 
     rectangle.setSize(size);
