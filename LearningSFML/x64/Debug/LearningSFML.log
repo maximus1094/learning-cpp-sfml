@@ -1,25 +1,4 @@
-﻿  Main.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(28,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(32,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(33,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(117,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(117,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(121,65): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(121,42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  Color.cpp
+  ColorPalette.cpp
+  Generating Code...
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe
