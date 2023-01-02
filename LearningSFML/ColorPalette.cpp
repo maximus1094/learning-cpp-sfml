@@ -14,7 +14,7 @@ ColorPalette::ColorPalette()
 
 Color ColorPalette::GetRandomColor()
 {
-    int randomIndex = ((int)(randomnumber() * 10000)) % colors.size() - 1;
+    int randomIndex = ((int)(randomnumber() * 10000)) % colors.size();
 
     return colors[randomIndex];
 }

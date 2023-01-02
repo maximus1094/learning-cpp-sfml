@@ -2,6 +2,9 @@
 #include <chrono>
 
 #include "Entity.h"
+#include "ColorPalette.h"
+
+//0, 230, 118
 
 Entity::Entity()
 {
@@ -11,7 +14,9 @@ Entity::Entity()
     position = sf::Vector2f(0, 0);
     size = sf::Vector2f(50, 50);
 
-    startColor = sf::Color(0, 230, 118);
+    Color color = ColorPalette().Green;
+
+    startColor = sf::Color(color.R, color.G, color.B);
     endColor = sf::Color::White;
 
     rectangle.setSize(size);
