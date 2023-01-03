@@ -1,5 +1,22 @@
-﻿  ParticleSystem.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(6,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(10,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(11,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Main.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(22,42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(22,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(27,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(27,45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe

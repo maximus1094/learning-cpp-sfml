@@ -4,6 +4,34 @@
 #include "Collider.h"
 #include "ParticleSystem.h"
 
+
+class Crate
+{
+    int XPos, YPos;
+    int Size;
+    sf::RectangleShape Shape;
+
+public:
+    Crate(int xPos, int yPos, int size)
+    {
+        XPos = xPos;
+        YPos = yPos;
+        Size = size;
+
+        Shape.setSize(sf::Vector2f(size, size));
+        Shape.setFillColor(sf::Color::White);
+        Shape.setOutlineColor(sf::Color(200, 200, 200, 255));
+        Shape.setOutlineThickness(1);
+
+        Shape.setPosition(sf::Vector2f(xPos - size / 2, yPos - size / 2));
+    }
+
+    sf::RectangleShape GetShape()
+    {
+        return Shape;
+    }
+};
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Square");
@@ -14,17 +42,14 @@ int main()
     // compoments to draw
     ParticleSystem particleSystem;
     
-    int boxSize = 120;
-    sf::RectangleShape box;
-    box.setSize(sf::Vector2f(boxSize, boxSize));
-    box.setFillColor(sf::Color::White);
-    box.setOutlineColor(sf::Color(200, 200, 200, 255));
-    box.setOutlineThickness(1);
-    box.setPosition(sf::Vector2f(800 / 2 - boxSize / 2, 600 / 2 - boxSize / 2));
-    
-    Collider boxCollider(box);
+    Crate crateTop((800 / 4) * 3, (600 / 4) * 3, 100);
+    Crate crateBottom((800 / 4) * 3, (600 / 4), 100);
 
-    particleSystem.AddCollider(boxCollider);
+    Collider boxColliderCrateTop(crateTop.GetShape());
+    Collider boxColliderCrateBottom(crateBottom.GetShape());
+
+    particleSystem.AddCollider(boxColliderCrateTop);
+    particleSystem.AddCollider(boxColliderCrateBottom);
 
     sf::Vector2i lastSpawnPosition;
 
@@ -56,7 +81,8 @@ int main()
 
         particleSystem.Draw(window);
 
-        window.draw(box);
+        window.draw(crateTop.GetShape());
+        window.draw(crateBottom.GetShape());
 
         window.display();
     }
