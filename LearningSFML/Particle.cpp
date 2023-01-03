@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 
-#include "Entity.h"
+#include "Particle.h"
 #include "ColorPalette.h"
 
 //0, 230, 118
 
-Entity::Entity()
+Particle::Particle()
 {
     lifeTime = 2.0f;
     isActive = false;
@@ -23,7 +23,7 @@ Entity::Entity()
     rectangle.setFillColor(startColor);
 }
 
-void Entity::Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity)
+void Particle::Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity)
 {
     position = sf::Vector2f(xPosition, yPosition);
     rectangle.setPosition(position);
@@ -36,7 +36,7 @@ void Entity::Spawn(int xPosition, int yPosition, int size, float xVelocity, floa
     isActive = true;
 }
 
-void Entity::Update(std::vector<Collider> collidersOther)
+void Particle::Update(std::vector<Collider> collidersOther)
 {
     if (isActive)
     {
@@ -121,7 +121,7 @@ void Entity::Update(std::vector<Collider> collidersOther)
     }
 }
 
-void Entity::Draw(sf::RenderWindow& window)
+void Particle::Draw(sf::RenderWindow& window)
 {
     if (isActive)
     {

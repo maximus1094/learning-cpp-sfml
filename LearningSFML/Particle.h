@@ -6,7 +6,7 @@
 
 #include "Collider.h"
 
-class Entity
+class Particle
 {
 private:
     sf::RectangleShape rectangle;
@@ -23,7 +23,7 @@ private:
     std::chrono::time_point<std::chrono::steady_clock> spawnTime;
 
 public:
-    Entity();
+    Particle();
 
     void Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity);
     void Update(std::vector<Collider> collidersOther);

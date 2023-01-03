@@ -1,53 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Entity.h"
 #include "Collider.h"
-#include "Rng.h"
-
-class ParticleSystem
-{
-    Entity entities[20];
-    int nextSpawnIndex = 0;
-
-    std::vector<Collider> collidersOther;
-
-public:
-    void Spawn(sf::Vector2i position)
-    {
-        int size = std::abs(50 * randomnumber());
-
-        int xPos = position.x - size / 2;
-        int yPos = position.y - size / 2;
-        float xVelocity = 10 * randomnumber();
-        float yVelocity = 10 * randomnumber();
-
-        entities[nextSpawnIndex].Spawn(xPos, yPos, size, xVelocity, yVelocity);
-
-        nextSpawnIndex = nextSpawnIndex++ % ((sizeof(entities) / sizeof(Entity)) - 1);
-    }
-
-    void Update()
-    {
-        for (Entity& e : entities)
-        {
-            e.Update(collidersOther);
-        }
-    }
-
-    void Draw(sf::RenderWindow& window)
-    {
-        for (int i = sizeof(entities) / sizeof(Entity) - 1; i >= 0; i--)
-        {
-            entities[i].Draw(window);
-        }
-    }
-
-    void AddCollider(Collider& otherCollider)
-    {
-        collidersOther.push_back(otherCollider);
-    }
-};
+#include "ParticleSystem.h"
 
 int main()
 {
