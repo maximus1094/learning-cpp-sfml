@@ -4,6 +4,40 @@
 #include "Collider.h"
 #include "ParticleSystem.h"
 
+class Player
+{
+private:
+    int XPos, YPos;
+    int Size;
+    sf::CircleShape Shape;
+
+public:
+    bool Spawned = false;
+
+    Player(int size)
+    {
+        Size = size;
+        
+        Shape.setRadius(size);
+        Shape.setFillColor(sf::Color(207, 216, 220));
+        //Shape.setOutlineColor(sf::Color::Red);
+        //Shape.setOutlineThickness(1);
+    }
+
+    sf::CircleShape GetShape()
+    {
+        return Shape;
+    }
+
+    void Spawn(int xPos, int yPos)
+    {
+        XPos = xPos;
+        YPos = yPos;
+        Shape.setPosition(xPos, yPos);
+
+        Spawned = true;
+    }
+};
 
 class Crate
 {
@@ -40,6 +74,7 @@ int main()
     sf::Event event;
 
     // compoments to draw
+    Player player(15);
     ParticleSystem particleSystem;
     
     Crate crateTop((800 / 4) * 3, (600 / 4) * 3, 100);
@@ -62,7 +97,7 @@ int main()
                 window.close();
             }
 
-            if (event.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.type == sf::Event::MouseMoved)
             {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
@@ -72,6 +107,12 @@ int main()
 
                     lastSpawnPosition = mousePosition;
                 }
+            }
+            else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+            {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+                player.Spawn(mousePosition.x, mousePosition.y);
             }
         }
 
@@ -83,6 +124,11 @@ int main()
 
         window.draw(crateTop.GetShape());
         window.draw(crateBottom.GetShape());
+
+        if (player.Spawned)
+        {
+            window.draw(player.GetShape());
+        }
 
         window.display();
     }
