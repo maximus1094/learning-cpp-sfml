@@ -1,31 +1,21 @@
 ﻿  Main.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(23,15): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(24,15): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(88,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(116,41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(40,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(81,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(116,35): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(81,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(179,83): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(156,83): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(179,59): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(156,59): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int

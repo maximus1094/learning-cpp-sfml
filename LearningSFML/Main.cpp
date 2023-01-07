@@ -3,92 +3,43 @@
 #include <SFML/Graphics.hpp>
 
 #include "Rng.h"
+#include "Vector2f.h"
 #include "Collider.h"
 #include "ParticleSystem.h"
-
-struct Vector2f
-{
-	float X, Y;
-
-	Vector2f() : X(0), Y(0) {};
-
-	Vector2f(float x, float y)
-	{
-		X = x;
-		Y = y;
-	}
-
-	Vector2f(sf::Vector2i sfVector)
-	{
-		X = sfVector.x;
-		Y = sfVector.y;
-	}
-
-	Vector2f Normalize()
-	{
-		float length = std::sqrtf(std::powf(X, 2) + std::powf(Y, 2));
-		float xNorm = X / length;
-		float yNorm = Y / length;
-
-		return Vector2f(xNorm, yNorm);
-	}
-
-	Vector2f Minus(Vector2f other)
-	{
-		return Vector2f(X - other.X, Y - other.Y);
-	}
-
-	std::string ToString()
-	{
-		return "(" + std::to_string(X) + ", " + std::to_string(Y) + ")";
-	}
-};
 
 class Entity
 {
 protected:
 	Vector2f Position;
-
-	sf::Shape* Shape;
-
-public:
 	bool Spawned;
 
-	~Entity()
-	{
-		delete Shape;
-	}
-
-	void Draw(sf::RenderWindow& window)
-	{
-		if (Spawned)
-		{
-			window.draw(*Shape);
-		}
-	}
+public:
+	virtual void Draw(sf::RenderWindow& window) = 0;
 
 	Vector2f GetPosition()
 	{
 		return Position;
 	}
 
-	sf::Shape* GetShape()
+	bool GetSpawned()
 	{
-		return Shape;
+		return Spawned;
 	}
 };
 
 class Player : public Entity
 {
+private:
+	sf::CircleShape Shape;
+
 public:
 	Player(int size)
 	{
-		sf::CircleShape* circle = new sf::CircleShape();
+		Shape = sf::CircleShape();
 
-		circle->setRadius(size);
-		circle->setFillColor(sf::Color(207, 216, 220));
+		Shape.setRadius(size);
+		Shape.setFillColor(sf::Color(207, 216, 220));
 
-		Shape = circle;
 		Spawned = false;
 	}
 
@@ -96,32 +47,58 @@ public:
 	{
 		Position = position;
 
-		sf::CircleShape* circle = reinterpret_cast<sf::CircleShape*>(Shape);
-
-		circle->setPosition(Position.X, Position.Y);
+		Shape.setPosition(Position.X, Position.Y);
 
 		Spawned = true;
+	}
+
+	void Draw(sf::RenderWindow& window) override
+	{
+		if (Spawned)
+		{
+			window.draw(Shape);
+		}
+	}
+
+	sf::CircleShape GetShape()
+	{
+		return Shape;
 	}
 };
 
 class Crate : public Entity
 {
+private:
+	sf::RectangleShape Shape;
+
 public:
 	Crate(Vector2f position, int size)
 	{
 		Position = position;
 
-		sf::RectangleShape* rectangle = new sf::RectangleShape();
+		Shape = sf::RectangleShape();
 
-		rectangle->setSize(sf::Vector2f(size, size));
-		rectangle->setFillColor(sf::Color::White);
-		rectangle->setOutlineColor(sf::Color(200, 200, 200, 255));
-		rectangle->setOutlineThickness(1);
+		Shape.setSize(sf::Vector2f(size, size));
+		Shape.setFillColor(sf::Color::White);
+		Shape.setOutlineColor(sf::Color(200, 200, 200, 255));
+		Shape.setOutlineThickness(1);
 
-		rectangle->setPosition(sf::Vector2f(position.X - size / 2, position.Y - size / 2));
+		Shape.setPosition(sf::Vector2f(position.X - size / 2, position.Y - size / 2));
 
-		Shape = rectangle;
 		Spawned = true;
+	}
+
+	void Draw(sf::RenderWindow& window) override
+	{
+		if (Spawned)
+		{
+			window.draw(Shape);
+		}
+	}
+
+	sf::RectangleShape GetShape()
+	{
+		return Shape;
 	}
 };
 
@@ -141,8 +118,8 @@ int main()
 	Crate crateTop(Vector2f((800 / 4) * 3, (600 / 4) * 3), 100);
 	Crate crateBottom(Vector2f((800 / 4) * 3, (600 / 4)), 100);
 
-	Collider boxColliderCrateTop(*reinterpret_cast<sf::RectangleShape*>(crateTop.GetShape()));
-	Collider boxColliderCrateBottom(*reinterpret_cast<sf::RectangleShape*>(crateBottom.GetShape()));
+	Collider boxColliderCrateTop(crateTop.GetShape());
+	Collider boxColliderCrateBottom(crateBottom.GetShape());
 
 	particleSystem.AddCollider(boxColliderCrateTop);
 	particleSystem.AddCollider(boxColliderCrateBottom);
@@ -174,7 +151,7 @@ int main()
 
 			std::cout << normalized.ToString() << std::endl;
 
-			if (player.Spawned)
+			if (player.GetSpawned())
 			{
 				particleSystem.Spawn(sf::Vector2i(player.GetPosition().X, player.GetPosition().Y), particleVelocity);
 			}
