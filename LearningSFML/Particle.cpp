@@ -14,7 +14,7 @@ Particle::Particle()
     position = sf::Vector2f(0, 0);
     size = sf::Vector2f(50, 50);
 
-    Color color = ColorPalette().Green;
+    Color color = ColorPalette().GetRandomColor();
 
     startColor = sf::Color(color.R, color.G, color.B);
     endColor = sf::Color::White;
