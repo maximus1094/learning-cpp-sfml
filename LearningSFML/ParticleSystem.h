@@ -11,7 +11,7 @@ private:
     std::vector<Collider> collidersOther;
 
 public:
-    void Spawn(sf::Vector2i position);
+    void Spawn(sf::Vector2i position, sf::Vector2f velocity);
 
     void Update();
 

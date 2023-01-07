@@ -1,16 +1,14 @@
 #include "ParticleSystem.h"
 #include "Rng.h"
 
-void ParticleSystem::Spawn(sf::Vector2i position)
+void ParticleSystem::Spawn(sf::Vector2i position, sf::Vector2f velocity)
 {
     int size = std::abs(50 * randomnumber());
 
     int xPos = position.x - size / 2;
     int yPos = position.y - size / 2;
-    float xVelocity = 10 * randomnumber();
-    float yVelocity = 10 * randomnumber();
 
-    entities[nextSpawnIndex].Spawn(xPos, yPos, size, xVelocity, yVelocity);
+    entities[nextSpawnIndex].Spawn(xPos, yPos, size, velocity.x, velocity.y);
 
     nextSpawnIndex = nextSpawnIndex++ % ((sizeof(entities) / sizeof(Particle)) - 1);
 }

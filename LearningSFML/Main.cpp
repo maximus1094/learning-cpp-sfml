@@ -1,68 +1,94 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Rng.h"
 #include "Collider.h"
 #include "ParticleSystem.h"
 
-class Player
+class Entity
 {
-private:
+protected:
     int XPos, YPos;
-    int Size;
-    sf::CircleShape Shape;
-
+    sf::Shape* Shape;
+    
 public:
-    bool Spawned = false;
+    bool Spawned;
 
-    Player(int size)
+    ~Entity()
     {
-        Size = size;
-        
-        Shape.setRadius(size);
-        Shape.setFillColor(sf::Color(207, 216, 220));
-        //Shape.setOutlineColor(sf::Color::Red);
-        //Shape.setOutlineThickness(1);
+        delete Shape;
     }
 
-    sf::CircleShape GetShape()
+    void Draw(sf::RenderWindow& window)
+    {
+        if (Spawned)
+        {
+            window.draw(*Shape);
+        }
+    }
+
+    int GetX()
+    {
+        return XPos;
+    }
+
+    int GetY()
+    {
+        return YPos;
+    }
+
+    sf::Shape* GetShape()
     {
         return Shape;
+    }
+};
+
+class Player : public Entity
+{
+public:
+    Player(int size)
+    {
+        sf::CircleShape* circle = new sf::CircleShape();
+
+        circle->setRadius(size);
+        circle->setFillColor(sf::Color(207, 216, 220));
+
+        Shape = circle;
+        Spawned = false;
     }
 
     void Spawn(int xPos, int yPos)
     {
         XPos = xPos;
         YPos = yPos;
-        Shape.setPosition(xPos, yPos);
+
+        sf::CircleShape* circle = reinterpret_cast<sf::CircleShape*>(Shape);
+
+        circle->setPosition(XPos, YPos);
 
         Spawned = true;
     }
 };
 
-class Crate
+class Crate : public Entity
 {
-    int XPos, YPos;
-    int Size;
-    sf::RectangleShape Shape;
-
 public:
     Crate(int xPos, int yPos, int size)
     {
         XPos = xPos;
         YPos = yPos;
-        Size = size;
+        
+        sf::RectangleShape* rectangle = new sf::RectangleShape();
 
-        Shape.setSize(sf::Vector2f(size, size));
-        Shape.setFillColor(sf::Color::White);
-        Shape.setOutlineColor(sf::Color(200, 200, 200, 255));
-        Shape.setOutlineThickness(1);
+        rectangle->setSize(sf::Vector2f(size, size));
+        rectangle->setFillColor(sf::Color::White);
+        rectangle->setOutlineColor(sf::Color(200, 200, 200, 255));
+        rectangle->setOutlineThickness(1);
 
-        Shape.setPosition(sf::Vector2f(xPos - size / 2, yPos - size / 2));
-    }
+        rectangle->setPosition(sf::Vector2f(xPos - size / 2, yPos - size / 2));
 
-    sf::RectangleShape GetShape()
-    {
-        return Shape;
+        Shape = rectangle;
+        Spawned = true;
     }
 };
 
@@ -80,8 +106,8 @@ int main()
     Crate crateTop((800 / 4) * 3, (600 / 4) * 3, 100);
     Crate crateBottom((800 / 4) * 3, (600 / 4), 100);
 
-    Collider boxColliderCrateTop(crateTop.GetShape());
-    Collider boxColliderCrateBottom(crateBottom.GetShape());
+    Collider boxColliderCrateTop(*reinterpret_cast<sf::RectangleShape*>(crateTop.GetShape()));
+    Collider boxColliderCrateBottom(*reinterpret_cast<sf::RectangleShape*>(crateBottom.GetShape()));
 
     particleSystem.AddCollider(boxColliderCrateTop);
     particleSystem.AddCollider(boxColliderCrateBottom);
@@ -101,9 +127,21 @@ int main()
             {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-                if (std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
+                float xVelocity = 10 * randomnumber();
+                float yVelocity = 10 * randomnumber();
+
+                float x = (mousePosition.x - player.GetX());
+                float y = (mousePosition.y - player.GetY());
+
+                sf::Vector2f particleVelocity(x / 10, y / 10);
+
+                if (player.Spawned && std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
                 {
-                    particleSystem.Spawn(mousePosition);
+                    particleSystem.Spawn(sf::Vector2i(player.GetX(), player.GetY()), particleVelocity);
+                }
+                else if (std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
+                {
+                    particleSystem.Spawn(mousePosition, particleVelocity);
 
                     lastSpawnPosition = mousePosition;
                 }
@@ -120,15 +158,10 @@ int main()
 
         window.clear(sf::Color::White);
 
+        crateTop.Draw(window);
+        crateBottom.Draw(window);
+        player.Draw(window);
         particleSystem.Draw(window);
-
-        window.draw(crateTop.GetShape());
-        window.draw(crateBottom.GetShape());
-
-        if (player.Spawned)
-        {
-            window.draw(player.GetShape());
-        }
 
         window.display();
     }
