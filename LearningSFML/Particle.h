@@ -4,6 +4,7 @@
 #include <chrono>
 #include <vector>
 
+#include "Color.h"
 #include "Collider.h"
 
 class Particle
@@ -25,7 +26,7 @@ private:
 public:
     Particle();
 
-    void Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity);
+    void Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity, Color color);
     void Update(std::vector<Collider> collidersOther);
     void Draw(sf::RenderWindow& window);
 };

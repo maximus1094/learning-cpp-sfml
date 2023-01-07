@@ -92,9 +92,11 @@ public:
 		Vector2f mousePositionPlayerOrigin = mousePosition.Minus(Position);
 		Vector2f normalized = mousePositionPlayerOrigin.Normalize();
 
-		sf::Vector2f particleVelocity(normalized.X * 10, normalized.Y * 10);
+		int scale = 10;
 
-		ParticleSystem.Spawn(sf::Vector2i(Position.X, Position.Y), particleVelocity);
+		sf::Vector2f direction(normalized.X * scale, normalized.Y * scale);
+
+		ParticleSystem.Spawn(sf::Vector2i(Position.X, Position.Y), direction);
 
 		lastShot = std::chrono::high_resolution_clock::now();
 	}

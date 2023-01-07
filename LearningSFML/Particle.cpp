@@ -23,13 +23,14 @@ Particle::Particle()
     rectangle.setFillColor(startColor);
 }
 
-void Particle::Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity)
+void Particle::Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity, Color color)
 {
     position = sf::Vector2f(xPosition, yPosition);
     rectangle.setPosition(position);
     rectangle.setSize(sf::Vector2f(size, size));
     velocity = sf::Vector2f(xVelocity, yVelocity);
 
+    startColor = sf::Color(color.R, color.G, color.B);
     rectangle.setFillColor(startColor);
     spawnTime = std::chrono::high_resolution_clock::now();
 

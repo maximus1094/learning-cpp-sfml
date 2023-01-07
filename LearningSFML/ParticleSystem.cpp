@@ -1,16 +1,38 @@
+#include <math.h>
+
 #include "ParticleSystem.h"
+#include "ColorPalette.h"
 #include "Rng.h"
 
-void ParticleSystem::Spawn(sf::Vector2i position, sf::Vector2f velocity)
+void ParticleSystem::Spawn(sf::Vector2i position, sf::Vector2f direction)
 {
-    int size = std::abs(50 * randomnumber());
+    // Spawn explosive particles (bigger), and regular small particles.
+    // Explosive particles shouldn't despawn? There will be way more small ones that explosive.
 
-    int xPos = position.x - size / 2;
-    int yPos = position.y - size / 2;
+    double pi = atan(1) * 4;
+    
 
-    entities[nextSpawnIndex].Spawn(xPos, yPos, size, velocity.x, velocity.y);
+    Color color = ColorPalette().GetRandomColor();
 
-    nextSpawnIndex = nextSpawnIndex++ % ((sizeof(entities) / sizeof(Particle)) - 1);
+    for (int i = 0; i < 3; i++)
+    {
+        // random angle offset
+        double angle = randomnumber(-15, 15);
+        double radians = (angle * pi) / 180;
+
+        double x = direction.x * std::cos(radians) - direction.y * std::sin(radians);
+        double y = direction.x * std::sin(radians) + direction.y * std::cos(radians);
+
+
+        int size = std::abs(50 * randomnumber());
+
+        int xPos = position.x - size / 2;
+        int yPos = position.y - size / 2;
+
+        entities[nextSpawnIndex].Spawn(xPos, yPos, size, x, y, color);
+
+        nextSpawnIndex = nextSpawnIndex++ % ((sizeof(entities) / sizeof(Particle)) - 1);
+    }
 }
 
 void ParticleSystem::Update()
