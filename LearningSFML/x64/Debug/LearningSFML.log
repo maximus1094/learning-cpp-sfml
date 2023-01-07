@@ -1,29 +1,33 @@
 ﻿  Main.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(53,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(67,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(67,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(83,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(23,15): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(24,15): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(88,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(116,41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(83,41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(116,35): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(88,67): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(179,83): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
-              T=float
+              T=int
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(88,50): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(179,59): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
-              T=float
+              T=int
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(130,33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(131,33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(133,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(134,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe

@@ -1,170 +1,202 @@
 #include <iostream>
+#include <chrono>
 #include <SFML/Graphics.hpp>
 
 #include "Rng.h"
 #include "Collider.h"
 #include "ParticleSystem.h"
 
+struct Vector2f
+{
+	float X, Y;
+
+	Vector2f() : X(0), Y(0) {};
+
+	Vector2f(float x, float y)
+	{
+		X = x;
+		Y = y;
+	}
+
+	Vector2f(sf::Vector2i sfVector)
+	{
+		X = sfVector.x;
+		Y = sfVector.y;
+	}
+
+	Vector2f Normalize()
+	{
+		float length = std::sqrtf(std::powf(X, 2) + std::powf(Y, 2));
+		float xNorm = X / length;
+		float yNorm = Y / length;
+
+		return Vector2f(xNorm, yNorm);
+	}
+
+	Vector2f Minus(Vector2f other)
+	{
+		return Vector2f(X - other.X, Y - other.Y);
+	}
+
+	std::string ToString()
+	{
+		return "(" + std::to_string(X) + ", " + std::to_string(Y) + ")";
+	}
+};
+
 class Entity
 {
 protected:
-    int XPos, YPos;
-    sf::Shape* Shape;
-    
+	Vector2f Position;
+
+	sf::Shape* Shape;
+
 public:
-    bool Spawned;
+	bool Spawned;
 
-    ~Entity()
-    {
-        delete Shape;
-    }
+	~Entity()
+	{
+		delete Shape;
+	}
 
-    void Draw(sf::RenderWindow& window)
-    {
-        if (Spawned)
-        {
-            window.draw(*Shape);
-        }
-    }
+	void Draw(sf::RenderWindow& window)
+	{
+		if (Spawned)
+		{
+			window.draw(*Shape);
+		}
+	}
 
-    int GetX()
-    {
-        return XPos;
-    }
+	Vector2f GetPosition()
+	{
+		return Position;
+	}
 
-    int GetY()
-    {
-        return YPos;
-    }
-
-    sf::Shape* GetShape()
-    {
-        return Shape;
-    }
+	sf::Shape* GetShape()
+	{
+		return Shape;
+	}
 };
 
 class Player : public Entity
 {
 public:
-    Player(int size)
-    {
-        sf::CircleShape* circle = new sf::CircleShape();
+	Player(int size)
+	{
+		sf::CircleShape* circle = new sf::CircleShape();
 
-        circle->setRadius(size);
-        circle->setFillColor(sf::Color(207, 216, 220));
+		circle->setRadius(size);
+		circle->setFillColor(sf::Color(207, 216, 220));
 
-        Shape = circle;
-        Spawned = false;
-    }
+		Shape = circle;
+		Spawned = false;
+	}
 
-    void Spawn(int xPos, int yPos)
-    {
-        XPos = xPos;
-        YPos = yPos;
+	void Spawn(Vector2f position)
+	{
+		Position = position;
 
-        sf::CircleShape* circle = reinterpret_cast<sf::CircleShape*>(Shape);
+		sf::CircleShape* circle = reinterpret_cast<sf::CircleShape*>(Shape);
 
-        circle->setPosition(XPos, YPos);
+		circle->setPosition(Position.X, Position.Y);
 
-        Spawned = true;
-    }
+		Spawned = true;
+	}
 };
 
 class Crate : public Entity
 {
 public:
-    Crate(int xPos, int yPos, int size)
-    {
-        XPos = xPos;
-        YPos = yPos;
-        
-        sf::RectangleShape* rectangle = new sf::RectangleShape();
+	Crate(Vector2f position, int size)
+	{
+		Position = position;
 
-        rectangle->setSize(sf::Vector2f(size, size));
-        rectangle->setFillColor(sf::Color::White);
-        rectangle->setOutlineColor(sf::Color(200, 200, 200, 255));
-        rectangle->setOutlineThickness(1);
+		sf::RectangleShape* rectangle = new sf::RectangleShape();
 
-        rectangle->setPosition(sf::Vector2f(xPos - size / 2, yPos - size / 2));
+		rectangle->setSize(sf::Vector2f(size, size));
+		rectangle->setFillColor(sf::Color::White);
+		rectangle->setOutlineColor(sf::Color(200, 200, 200, 255));
+		rectangle->setOutlineThickness(1);
 
-        Shape = rectangle;
-        Spawned = true;
-    }
+		rectangle->setPosition(sf::Vector2f(position.X - size / 2, position.Y - size / 2));
+
+		Shape = rectangle;
+		Spawned = true;
+	}
 };
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Square");
-    window.setFramerateLimit(60);
+	using namespace std::literals::chrono_literals;
 
-    sf::Event event;
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Square");
+	window.setFramerateLimit(60);
 
-    // compoments to draw
-    Player player(15);
-    ParticleSystem particleSystem;
-    
-    Crate crateTop((800 / 4) * 3, (600 / 4) * 3, 100);
-    Crate crateBottom((800 / 4) * 3, (600 / 4), 100);
+	sf::Event event;
 
-    Collider boxColliderCrateTop(*reinterpret_cast<sf::RectangleShape*>(crateTop.GetShape()));
-    Collider boxColliderCrateBottom(*reinterpret_cast<sf::RectangleShape*>(crateBottom.GetShape()));
+	// compoments to draw
+	Player player(15);
+	ParticleSystem particleSystem;
 
-    particleSystem.AddCollider(boxColliderCrateTop);
-    particleSystem.AddCollider(boxColliderCrateBottom);
+	Crate crateTop(Vector2f((800 / 4) * 3, (600 / 4) * 3), 100);
+	Crate crateBottom(Vector2f((800 / 4) * 3, (600 / 4)), 100);
 
-    sf::Vector2i lastSpawnPosition;
+	Collider boxColliderCrateTop(*reinterpret_cast<sf::RectangleShape*>(crateTop.GetShape()));
+	Collider boxColliderCrateBottom(*reinterpret_cast<sf::RectangleShape*>(crateBottom.GetShape()));
 
-    while (window.isOpen()) {
+	particleSystem.AddCollider(boxColliderCrateTop);
+	particleSystem.AddCollider(boxColliderCrateBottom);
 
-        while (window.pollEvent(event)) {
+	auto start = std::chrono::high_resolution_clock::now();
 
-            if (event.type == sf::Event::Closed) {
+	while (window.isOpen()) {
 
-                window.close();
-            }
+		while (window.pollEvent(event)) {
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.type == sf::Event::MouseMoved)
-            {
-                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+			if (event.type == sf::Event::Closed) {
 
-                float xVelocity = 10 * randomnumber();
-                float yVelocity = 10 * randomnumber();
+				window.close();
+			}
+		}
 
-                float x = (mousePosition.x - player.GetX());
-                float y = (mousePosition.y - player.GetY());
+		auto end = std::chrono::high_resolution_clock::now();
 
-                sf::Vector2f particleVelocity(x / 10, y / 10);
+		std::chrono::duration<float> durationS = end - start;
 
-                if (player.Spawned && std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
-                {
-                    particleSystem.Spawn(sf::Vector2i(player.GetX(), player.GetY()), particleVelocity);
-                }
-                else if (std::abs(lastSpawnPosition.x - mousePosition.x) > 10)
-                {
-                    particleSystem.Spawn(mousePosition, particleVelocity);
+		Vector2f mousePosition = Vector2f(sf::Mouse::getPosition(window));
 
-                    lastSpawnPosition = mousePosition;
-                }
-            }
-            else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-            {
-                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && durationS.count() > 0.1f) //  && event.type == sf::Event::MouseMoved
+		{
+			Vector2f mousePositionPlayerOrigin = mousePosition.Minus(player.GetPosition());
+			Vector2f normalized = mousePositionPlayerOrigin.Normalize();
+	
+			sf::Vector2f particleVelocity(normalized.X * 10, normalized.Y * 10);
 
-                player.Spawn(mousePosition.x, mousePosition.y);
-            }
-        }
+			std::cout << normalized.ToString() << std::endl;
 
-        particleSystem.Update();
+			if (player.Spawned)
+			{
+				particleSystem.Spawn(sf::Vector2i(player.GetPosition().X, player.GetPosition().Y), particleVelocity);
+			}
 
-        window.clear(sf::Color::White);
+			start = std::chrono::high_resolution_clock::now();
+		}
+		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		{
+			player.Spawn(mousePosition);
+		}
 
-        crateTop.Draw(window);
-        crateBottom.Draw(window);
-        player.Draw(window);
-        particleSystem.Draw(window);
+		particleSystem.Update();
 
-        window.display();
-    }
+		window.clear(sf::Color::White);
 
-    return 0;
+		crateTop.Draw(window);
+		crateBottom.Draw(window);
+		player.Draw(window);
+		particleSystem.Draw(window);
+
+		window.display();
+	}
+
+	return 0;
 }
