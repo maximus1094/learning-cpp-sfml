@@ -1,8 +1,11 @@
 #include "ExplodingParticle.h"
+#include "Rng.h"
 
 void ExplodingParticle::OnCollision(bool horizontalCollision)
 {
-	explosive.Spawn(Position, StartColor);
+    int size = randomnumber(5, 10);
+
+	explosive.Spawn(Position, StartColor, size);
 
     if (horizontalCollision)
     {

@@ -41,13 +41,11 @@ ExplosiveParticleSystem::~ExplosiveParticleSystem()
     delete[] particles;
 }
 
-void ExplosiveParticleSystem::Spawn(Vector2f position, Color color)
+void ExplosiveParticleSystem::Spawn(Vector2f position, Color color, int size)
 {
     for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
     {
         Vector2f velocity(randomnumber() * 10, randomnumber() * 10);
-
-        int size = std::abs(50 * randomnumber());
 
         BaseSpawn(position, velocity, size, color);
     }

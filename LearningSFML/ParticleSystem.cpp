@@ -66,19 +66,19 @@ void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)
     
     Color color = ColorPalette().GetRandomColor();
 
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    // random angle offset
-    //    double angle = randomnumber(-15, 15);
-    //    double radians = (angle * pi) / 180;
+    for (int i = 0; i < 5; i++)
+    {
+        // random angle offset
+        double angle = randomnumber(-15, 15);
+        double radians = (angle * pi) / 180;
 
-    //    double x = velocity.X * std::cos(radians) - velocity.Y * std::sin(radians);
-    //    double y = velocity.X * std::sin(radians) + velocity.Y * std::cos(radians);
+        double x = velocity.X * std::cos(radians) - velocity.Y * std::sin(radians);
+        double y = velocity.X * std::sin(radians) + velocity.Y * std::cos(radians);
 
-    //    int size = std::abs(50 * randomnumber());
+        int size = randomnumber(10, 20);
 
-    //    BaseSpawn(position.Minus(Vector2f(size / 2, size / 2)), Vector2f(x, y), size, color);
-    //}
+        BaseSpawn(position.Minus(Vector2f(size / 2, size / 2)), Vector2f(x, y), size, color);
+    }
 
     for (int i = 0; i < 3; i++)
     {
@@ -89,7 +89,7 @@ void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)
         double x = velocity.X * std::cos(radians) - velocity.Y * std::sin(radians);
         double y = velocity.X * std::sin(radians) + velocity.Y * std::cos(radians);
 
-        int size = std::abs(50 * randomnumber());
+        int size = randomnumber(25, 50);
 
         // Spawning explosive particles.
         explodingParticles[nextExplosiveSpawnIndex].Spawn(
