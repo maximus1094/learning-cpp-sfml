@@ -4,7 +4,6 @@
 #include "Particle.h"
 #include "ColorPalette.h"
 
-//0, 230, 118
 
 Particle::Particle()
 {
@@ -112,9 +111,9 @@ void Particle::Update(std::vector<Collider> collidersOther)
 
         sf::Color fillColor = rectangle.getFillColor();
 
-        sf::Uint8 r = (endColor.r - fillColor.r) * 0.05 + fillColor.r;
-        sf::Uint8 g = (endColor.g - fillColor.g) * 0.05 + fillColor.g;
-        sf::Uint8 b = (endColor.b - fillColor.b) * 0.05 + fillColor.b;
+        sf::Uint8 r = (endColor.r - fillColor.r) * 0.025 + fillColor.r;
+        sf::Uint8 g = (endColor.g - fillColor.g) * 0.025 + fillColor.g;
+        sf::Uint8 b = (endColor.b - fillColor.b) * 0.025 + fillColor.b;
 
         sf::Color c(r, g, b, 255);
 

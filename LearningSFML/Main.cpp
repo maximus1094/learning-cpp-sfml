@@ -84,7 +84,7 @@ public:
 		auto now = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<float> durationS = now - lastShot;
 
-		if (durationS.count() < 0.1f)
+		if (durationS.count() < 0.08f)
 		{
 			return;
 		}
@@ -94,9 +94,7 @@ public:
 
 		int scale = 10;
 
-		sf::Vector2f direction(normalized.X * scale, normalized.Y * scale);
-
-		ParticleSystem.Spawn(sf::Vector2i(Position.X, Position.Y), direction);
+		ParticleSystem.Spawn(Position, normalized.Multiply(scale));
 
 		lastShot = std::chrono::high_resolution_clock::now();
 	}

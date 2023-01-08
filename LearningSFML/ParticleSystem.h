@@ -1,21 +1,24 @@
 #pragma once
 
-#include "Particle.h"
+#include "BaseParticleSystem.h"
 
-class ParticleSystem
+class ParticleSystem : public BaseParticleSystem
 {
-private:
-    Particle entities[20];
-    int nextSpawnIndex = 0;
-
-    std::vector<Collider> collidersOther;
-
 public:
-    void Spawn(sf::Vector2i position, sf::Vector2f direction);
+    static const int NUMBER_OF_PARTICLES = 50;
+    
+    ParticleSystem();
+    
+    // Copy
+    ParticleSystem(const ParticleSystem& other);
 
-    void Update();
+    // Assignment
+    ParticleSystem& operator=(const ParticleSystem& other);
 
-    void Draw(sf::RenderWindow& window);
+    // Destructor
+    ~ParticleSystem();
 
-    void AddCollider(Collider& otherCollider);
+    void Spawn(Vector2f position, Vector2f velocity);
+
+    virtual int GetNumberOfParticles();
 };

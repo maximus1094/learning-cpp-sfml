@@ -20,6 +20,11 @@ Vector2f Vector2f::Minus(Vector2f other)
 	return Vector2f(X - other.X, Y - other.Y);
 }
 
+Vector2f Vector2f::Multiply(float value)
+{
+	return Vector2f(X * value, Y * value);
+}
+
 std::string Vector2f::ToString()
 {
 	return "(" + std::to_string(X) + ", " + std::to_string(Y) + ")";
