@@ -20,7 +20,7 @@ public:
     // Destructor
     ~ExplosiveParticleSystem();
 
-    void Spawn(Vector2f position);
+    void Spawn(Vector2f position, Color color);
 
-    virtual int GetNumberOfParticles();
+    int GetNumberOfParticles() override;
 };

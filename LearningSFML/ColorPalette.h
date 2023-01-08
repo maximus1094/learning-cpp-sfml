@@ -10,6 +10,7 @@ private:
     std::vector<Color> colors;
 
 public:
+    Color White;
     Color Green;
     Color Orange;
     Color DeepPurple;

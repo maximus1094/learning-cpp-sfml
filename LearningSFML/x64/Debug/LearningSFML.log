@@ -1,14 +1,48 @@
-﻿  Main.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(25,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+﻿  BaseParticleSystem.cpp
+  ExplodingParticle.cpp
+  ExplosiveParticleSystem.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(48,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(48,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(50,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Main.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(26,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(25,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(26,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(62,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(98,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(63,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(99,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Particle.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(29,42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(29,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(111,30): warning C4244: 'initializing': conversion from '_Rep' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Rep=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(115,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(116,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(117,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+  ParticleSystem.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(92,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(96,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(96,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(99,13): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(98,13): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(52): warning C4715: 'ParticleSystem::operator=': not all control paths return a value
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(37): warning C4715: 'ExplosiveParticleSystem::operator=': not all control paths return a value
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe

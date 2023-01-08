@@ -41,10 +41,8 @@ ExplosiveParticleSystem::~ExplosiveParticleSystem()
     delete[] particles;
 }
 
-void ExplosiveParticleSystem::Spawn(Vector2f position)
+void ExplosiveParticleSystem::Spawn(Vector2f position, Color color)
 {
-    Color color = ColorPalette().GetRandomColor();
-
     for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
     {
         Vector2f velocity(randomnumber() * 10, randomnumber() * 10);

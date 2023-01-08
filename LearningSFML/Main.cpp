@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "ParticleSystem.h"
 #include "ExplosiveParticleSystem.h"
+#include "ColorPalette.h"
 
 
 class Crate : public Entity
@@ -172,7 +173,7 @@ int main()
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && canSpawnPlayer)
 		{
-			explosiveParticleSystem.Spawn(mousePosition);
+			explosiveParticleSystem.Spawn(mousePosition, ColorPalette().GetRandomColor());
 
 			player.Spawn(mousePosition);
 

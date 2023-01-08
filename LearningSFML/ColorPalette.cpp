@@ -3,6 +3,7 @@
 
 ColorPalette::ColorPalette()
 {
+    White = Color(255, 255, 255);
     Green = Color(0, 200, 83, 0);
     Orange = Color(255, 109, 0, 0);
     DeepPurple = Color(98, 0, 234, 0);

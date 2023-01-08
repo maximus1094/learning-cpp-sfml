@@ -14,9 +14,9 @@ protected:
     Particle* particles;
 
 public:
-    void Update();
+    virtual void Update();
 
-    void Draw(sf::RenderWindow& window);
+    virtual void Draw(sf::RenderWindow& window);
 
     void AddCollider(Collider& otherCollider);
 

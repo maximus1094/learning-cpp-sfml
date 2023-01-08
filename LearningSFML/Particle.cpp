@@ -10,27 +10,26 @@ Particle::Particle()
     lifeTime = 2.0f;
     isActive = false;
 
-    position = sf::Vector2f(0, 0);
+    Position = Vector2f(0, 0);
     size = sf::Vector2f(50, 50);
 
-    Color color = ColorPalette().GetRandomColor();
-
-    startColor = sf::Color(color.R, color.G, color.B);
-    endColor = sf::Color::White;
+    StartColor = ColorPalette().GetRandomColor();
+    EndColor = ColorPalette().White;
 
     rectangle.setSize(size);
-    rectangle.setFillColor(startColor);
+    rectangle.setFillColor(sf::Color(StartColor.R, StartColor.G, StartColor.B));
 }
 
-void Particle::Spawn(int xPosition, int yPosition, int size, float xVelocity, float yVelocity, Color color)
+void Particle::Spawn(Vector2f position, int size, float xVelocity, float yVelocity, Color color)
 {
-    position = sf::Vector2f(xPosition, yPosition);
-    rectangle.setPosition(position);
+    Position = position;
+    StartColor = color;
+
+    rectangle.setPosition(sf::Vector2f(position.X, position.Y));
     rectangle.setSize(sf::Vector2f(size, size));
     velocity = sf::Vector2f(xVelocity, yVelocity);
 
-    startColor = sf::Color(color.R, color.G, color.B);
-    rectangle.setFillColor(startColor);
+    rectangle.setFillColor(sf::Color(StartColor.R, StartColor.G, StartColor.B));
     spawnTime = std::chrono::high_resolution_clock::now();
 
     isActive = true;
@@ -44,11 +43,11 @@ void Particle::Update(std::vector<Collider> collidersOther)
 
         std::chrono::duration<float> duration = (currentTime - spawnTime);
 
-        float newX = position.x + velocity.x;
-        float newY = position.y + velocity.y;
+        float newX = Position.X + velocity.x;
+        float newY = Position.Y + velocity.y;
 
-        position = sf::Vector2f(newX, newY);
-        rectangle.setPosition(position);
+        Position = Vector2f(newX, newY);
+        rectangle.setPosition(sf::Vector2f(Position.X, Position.Y));
 
         bool collided = false;
         for (Collider& c : collidersOther)
@@ -57,45 +56,47 @@ void Particle::Update(std::vector<Collider> collidersOther)
 
             if (velocity.x > 0 &&
                 // crossing x moving right
-                position.x + size.x > c.xPosition &&
-                position.x < c.xPosition &&
+                Position.X + size.x > c.xPosition &&
+                Position.X < c.xPosition &&
                 
                 // within y bounds
-                position.y + size.y > c.yPosition &&
-                position.y < c.yPosition + c.size ||
+                Position.Y + size.y > c.yPosition &&
+                Position.Y < c.yPosition + c.size ||
                 
                 velocity.x < 0 &&
                 // crossing x moving left
-                position.x < c.xPosition + c.size &&
-                position.x + size.x > c.xPosition + c.size &&
+                Position.X < c.xPosition + c.size &&
+                Position.X + size.x > c.xPosition + c.size &&
                 
                 // within y bounds
-                position.y + size.y > c.yPosition&&
-                position.y < c.yPosition + c.size)
+                Position.Y + size.y > c.yPosition&&
+                Position.Y < c.yPosition + c.size)
             {
-                velocity.x *= -1;
+                OnCollision(true);
+                
                 collided = true;
             }
 
             if (velocity.y > 0 &&
                 // crossing y moving bottom
-                position.y + size.y > c.yPosition &&
-                position.y < c.yPosition &&
+                Position.Y + size.y > c.yPosition &&
+                Position.Y < c.yPosition &&
 
                 // within x bounds
-                position.x + size.x > c.xPosition &&
-                position.x < c.xPosition + c.size ||
+                Position.X + size.x > c.xPosition &&
+                Position.X < c.xPosition + c.size ||
 
                 velocity.y < 0 &&
                 // crossing y moving top
-                position.y < c.yPosition + c.size &&
-                position.y + size.y > c.yPosition + c.size &&
+                Position.Y < c.yPosition + c.size &&
+                Position.Y + size.y > c.yPosition + c.size &&
 
                 // within x bounds
-                position.x + size.x > c.xPosition &&
-                position.x < c.xPosition + c.size)
+                Position.X + size.x > c.xPosition &&
+                Position.X < c.xPosition + c.size)
             {
-                velocity.y *= -1;
+                OnCollision(false);
+
                 collided = true;
             }
 
@@ -111,9 +112,9 @@ void Particle::Update(std::vector<Collider> collidersOther)
 
         sf::Color fillColor = rectangle.getFillColor();
 
-        sf::Uint8 r = (endColor.r - fillColor.r) * 0.025 + fillColor.r;
-        sf::Uint8 g = (endColor.g - fillColor.g) * 0.025 + fillColor.g;
-        sf::Uint8 b = (endColor.b - fillColor.b) * 0.025 + fillColor.b;
+        sf::Uint8 r = (EndColor.R - fillColor.r) * 0.025 + fillColor.r;
+        sf::Uint8 g = (EndColor.G - fillColor.g) * 0.025 + fillColor.g;
+        sf::Uint8 b = (EndColor.B - fillColor.b) * 0.025 + fillColor.b;
 
         sf::Color c(r, g, b, 255);
 
@@ -126,5 +127,17 @@ void Particle::Draw(sf::RenderWindow& window)
     if (isActive)
     {
         window.draw(rectangle);
+    }
+}
+
+void Particle::OnCollision(bool horizontalCollision)
+{
+    if (horizontalCollision)
+    {
+        velocity.x *= -1;
+    }
+    else
+    {
+        velocity.y *= -1;
     }
 }

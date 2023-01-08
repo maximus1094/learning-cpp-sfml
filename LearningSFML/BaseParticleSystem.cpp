@@ -26,7 +26,7 @@ void BaseParticleSystem::AddCollider(Collider& otherCollider)
 
 void BaseParticleSystem::BaseSpawn(Vector2f position, Vector2f velocity, int size, Color color)
 {
-    particles[nextSpawnIndex].Spawn(position.X, position.Y, size, velocity.X, velocity.Y, color);
+    particles[nextSpawnIndex].Spawn(position, size, velocity.X, velocity.Y, color);
 
     nextSpawnIndex = nextSpawnIndex++ % (GetNumberOfParticles() - 1);
 }
