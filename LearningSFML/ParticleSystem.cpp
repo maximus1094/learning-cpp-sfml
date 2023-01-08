@@ -5,6 +5,11 @@
 #include "Rng.h"
 
 
+ParticleSystem::ParticleSystem()
+{
+    particles = new Particle[NUMBER_OF_PARTICLES];
+}
+
 ParticleSystem::ParticleSystem(const ParticleSystem& other)
 {
     nextSpawnIndex = other.nextSpawnIndex;
@@ -37,11 +42,6 @@ ParticleSystem& ParticleSystem::operator=(const ParticleSystem& other)
 ParticleSystem::~ParticleSystem()
 {
     delete[] particles;
-}
-
-ParticleSystem::ParticleSystem()
-{
-    particles = new Particle[NUMBER_OF_PARTICLES];
 }
 
 void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)

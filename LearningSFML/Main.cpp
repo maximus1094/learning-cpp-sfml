@@ -7,6 +7,7 @@
 #include "Collider.h"
 #include "Entity.h"
 #include "ParticleSystem.h"
+#include "ExplosiveParticleSystem.h"
 
 
 class Crate : public Entity
@@ -143,6 +144,12 @@ int main()
 
 	Player player(15, worldColliders);
 
+	ExplosiveParticleSystem explosiveParticleSystem;
+	explosiveParticleSystem.AddCollider(boxColliderCrateTop);
+	explosiveParticleSystem.AddCollider(boxColliderCrateBottom);
+
+	bool canSpawnPlayer = true;
+
 	while (window.isOpen()) {
 
 		while (window.pollEvent(event)) {
@@ -150,6 +157,10 @@ int main()
 			if (event.type == sf::Event::Closed) {
 
 				window.close();
+			}
+			else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Right)
+			{
+				canSpawnPlayer = true;
 			}
 		}
 
@@ -159,11 +170,16 @@ int main()
 		{
 			player.Shoot(mousePosition);
 		}
-		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && canSpawnPlayer)
 		{
+			explosiveParticleSystem.Spawn(mousePosition);
+
 			player.Spawn(mousePosition);
+
+			canSpawnPlayer = false;
 		}
 
+		explosiveParticleSystem.Update();
 		player.Update();
 		
 		window.clear(sf::Color::White);
@@ -171,6 +187,7 @@ int main()
 		crateTop.Draw(window);
 		crateBottom.Draw(window);
 		player.Draw(window);
+		explosiveParticleSystem.Draw(window);
 
 		window.display();
 	}

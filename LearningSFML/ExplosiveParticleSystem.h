@@ -11,5 +11,16 @@ public:
 
     ExplosiveParticleSystem();
 
+    // Copy
+    ExplosiveParticleSystem(const ExplosiveParticleSystem& other);
+
+    // Assignment
+    ExplosiveParticleSystem& operator=(const ExplosiveParticleSystem& other);
+
+    // Destructor
+    ~ExplosiveParticleSystem();
+
     void Spawn(Vector2f position);
+
+    virtual int GetNumberOfParticles();
 };
