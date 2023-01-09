@@ -12,7 +12,9 @@ struct Vector2f
 
 	Vector2f Normalize();
 
-	Vector2f Minus(Vector2f other);
+	Vector2f Add(Vector2f other);
+
+	Vector2f Subtract(Vector2f other);
 
 	Vector2f Multiply(float value);
 

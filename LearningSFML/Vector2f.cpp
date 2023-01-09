@@ -15,7 +15,12 @@ Vector2f Vector2f::Normalize()
 	return Vector2f(xNorm, yNorm);
 }
 
-Vector2f Vector2f::Minus(Vector2f other)
+Vector2f Vector2f::Add(Vector2f other)
+{
+	return Vector2f(X + other.X, Y + other.Y);
+}
+
+Vector2f Vector2f::Subtract(Vector2f other)
 {
 	return Vector2f(X - other.X, Y - other.Y);
 }

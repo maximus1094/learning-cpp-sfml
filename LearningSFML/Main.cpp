@@ -51,6 +51,8 @@ class Player : public Entity
 {
 private:
 	sf::CircleShape Shape;
+	Color StartColor = ColorPalette().GetRandomColor();
+	Color EndColor = ColorPalette().White;
 	ParticleSystem ParticleSystem;
 
 	std::chrono::steady_clock::time_point lastShot;
@@ -58,20 +60,27 @@ private:
 public:
 	Player(int size, std::vector<Collider>& worldColliders)
 	{
+		StartColor = ColorPalette().GetRandomColor();
+		EndColor = Color(207, 216, 220);
+
 		Shape = sf::CircleShape();
 
 		Shape.setRadius(size);
-		Shape.setFillColor(sf::Color(207, 216, 220));
+		Shape.setFillColor(sf::Color(EndColor.R, EndColor.G, EndColor.B));
 
 		ParticleSystem.AddCollider(worldColliders[0]);
 		ParticleSystem.AddCollider(worldColliders[1]);
 	}
 
-	void Spawn(Vector2f position)
+	void Spawn(Vector2f position, Color spawnColor)
 	{
-		Position = Vector2f(position.X - Shape.getRadius(), position.Y - Shape.getRadius());
+		StartColor = spawnColor;
 
-		Shape.setPosition(Position.X, Position.Y);
+		Shape.setFillColor(sf::Color(spawnColor.R, spawnColor.G, spawnColor.B));
+
+		Position = position;
+
+		Shape.setPosition(position.X - Shape.getRadius(), position.Y - Shape.getRadius());
 
 		Spawned = true;
 	}
@@ -91,12 +100,20 @@ public:
 			return;
 		}
 
-		Vector2f mousePositionPlayerOrigin = mousePosition.Minus(Position);
+		Vector2f mousePositionPlayerOrigin = mousePosition.Subtract(Position);
 		Vector2f normalized = mousePositionPlayerOrigin.Normalize();
 
-		int scale = 10;
+		int velocityScale = 10;
+		int positionScale = 30;
 
-		ParticleSystem.Spawn(Position, normalized.Multiply(scale));
+		Vector2f mousePlayerDifference = mousePosition
+			.Subtract(Position)
+			.Normalize()
+			.Multiply(positionScale);
+
+		Vector2f particleOrigin = Position.Add(mousePlayerDifference);
+
+		ParticleSystem.Spawn(particleOrigin, normalized.Multiply(velocityScale));
 
 		lastShot = std::chrono::high_resolution_clock::now();
 	}
@@ -106,6 +123,16 @@ public:
 		if (Spawned)
 		{
 			ParticleSystem.Update();
+
+			sf::Color fillColor = Shape.getFillColor();
+
+			sf::Uint8 r = (EndColor.R - fillColor.r) * 0.025 + fillColor.r;
+			sf::Uint8 g = (EndColor.G - fillColor.g) * 0.025 + fillColor.g;
+			sf::Uint8 b = (EndColor.B - fillColor.b) * 0.025 + fillColor.b;
+
+			sf::Color c(r, g, b, 255);
+
+			Shape.setFillColor(c);
 		}
 	}
 
@@ -173,11 +200,13 @@ int main()
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && canSpawnPlayer)
 		{
-			int size = randomnumber(30, 50);
+			int size = randomnumber(10, 20);
 
-			explosiveParticleSystem.Spawn(mousePosition, ColorPalette().GetRandomColor(), size);
+			Color spawnColor = ColorPalette().GetRandomColor();
 
-			player.Spawn(mousePosition);
+			explosiveParticleSystem.Spawn(mousePosition, spawnColor, size);
+
+			player.Spawn(mousePosition, spawnColor);
 
 			canSpawnPlayer = false;
 		}

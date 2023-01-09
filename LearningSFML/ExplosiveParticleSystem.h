@@ -7,7 +7,7 @@
 class ExplosiveParticleSystem : public BaseParticleSystem
 {
 public:
-    static const int NUMBER_OF_PARTICLES = 10;
+    static const int NUMBER_OF_PARTICLES = 20;
 
     ExplosiveParticleSystem();
 

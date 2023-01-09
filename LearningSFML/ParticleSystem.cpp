@@ -77,7 +77,7 @@ void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)
 
         int size = randomnumber(10, 20);
 
-        BaseSpawn(position.Minus(Vector2f(size / 2, size / 2)), Vector2f(x, y), size, color);
+        BaseSpawn(position.Subtract(Vector2f(size / 2, size / 2)), Vector2f(x, y), size, color);
     }
 
     for (int i = 0; i < 3; i++)
@@ -93,7 +93,7 @@ void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)
 
         // Spawning explosive particles.
         explodingParticles[nextExplosiveSpawnIndex].Spawn(
-            position.Minus(Vector2f(size / 2, size / 2)),
+            position.Subtract(Vector2f(size / 2, size / 2)),
             size,
             x,
             y,
