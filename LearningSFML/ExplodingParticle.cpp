@@ -3,9 +3,7 @@
 
 void ExplodingParticle::OnCollision(bool horizontalCollision)
 {
-    int size = randomnumber(5, 10);
-
-	explosive.Spawn(Position, StartColor, size);
+	explosive.Spawn(Position, StartColor, 5, 10);
 
     if (horizontalCollision)
     {

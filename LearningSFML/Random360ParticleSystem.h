@@ -20,7 +20,7 @@ public:
     // Destructor
     ~Random360ParticleSystem();
 
-    void Spawn(Vector2f position, Color color, int size);
+    void Spawn(Vector2f position, Color color, int sizeMin, int sizeMax);
 
     int GetNumberOfParticles() override;
 };

@@ -41,11 +41,13 @@ Random360ParticleSystem::~Random360ParticleSystem()
     delete[] particles;
 }
 
-void Random360ParticleSystem::Spawn(Vector2f position, Color color, int size)
+void Random360ParticleSystem::Spawn(Vector2f position, Color color, int sizeMin, int sizeMax)
 {
     for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
     {
         Vector2f velocity(randomnumber() * 10, randomnumber() * 10);
+
+        int size = randomnumber(sizeMin, sizeMax);
 
         BaseSpawn(position, velocity, size, color);
     }

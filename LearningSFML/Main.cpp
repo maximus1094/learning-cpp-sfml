@@ -200,11 +200,9 @@ int main()
 		}
 		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && canSpawnPlayer)
 		{
-			int size = randomnumber(10, 20);
-
 			Color spawnColor = ColorPalette().GetRandomColor();
 
-			explosiveParticleSystem.Spawn(mousePosition, spawnColor, size);
+			explosiveParticleSystem.Spawn(mousePosition, spawnColor, 10, 20);
 
 			player.Spawn(mousePosition, spawnColor);
 
