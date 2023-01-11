@@ -4,21 +4,21 @@
 
 #include "BaseParticleSystem.h"
 
-class ExplosiveParticleSystem : public BaseParticleSystem
+class Random360ParticleSystem : public BaseParticleSystem
 {
 public:
     static const int NUMBER_OF_PARTICLES = 20;
 
-    ExplosiveParticleSystem();
+    Random360ParticleSystem();
 
     // Copy
-    ExplosiveParticleSystem(const ExplosiveParticleSystem& other);
+    Random360ParticleSystem(const Random360ParticleSystem& other);
 
     // Assignment
-    ExplosiveParticleSystem& operator=(const ExplosiveParticleSystem& other);
+    Random360ParticleSystem& operator=(const Random360ParticleSystem& other);
 
     // Destructor
-    ~ExplosiveParticleSystem();
+    ~Random360ParticleSystem();
 
     void Spawn(Vector2f position, Color color, int size);
 

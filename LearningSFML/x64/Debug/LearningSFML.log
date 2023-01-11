@@ -1,8 +1,9 @@
-﻿  ExplodingParticle.cpp
+﻿  BaseParticleSystem.cpp
+  ExplodingParticle.cpp
 C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplodingParticle.cpp(6,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  ExplosiveParticleSystem.cpp
-C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(48,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(48,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Random360ParticleSystem.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(48,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(48,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Main.cpp
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Main.cpp(26,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
@@ -34,5 +35,5 @@ C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(99,13): warning C
 C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(98,13): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
 C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(52): warning C4715: 'ParticleSystem::operator=': not all control paths return a value
-C:\Workspaces\cpp\LearningSFML\LearningSFML\ExplosiveParticleSystem.cpp(37): warning C4715: 'ExplosiveParticleSystem::operator=': not all control paths return a value
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(37): warning C4715: 'Random360ParticleSystem::operator=': not all control paths return a value
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe

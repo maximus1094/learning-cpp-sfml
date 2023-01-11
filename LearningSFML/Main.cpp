@@ -7,7 +7,7 @@
 #include "Collider.h"
 #include "Entity.h"
 #include "ParticleSystem.h"
-#include "ExplosiveParticleSystem.h"
+#include "Random360ParticleSystem.h"
 #include "ColorPalette.h"
 
 
@@ -172,7 +172,7 @@ int main()
 
 	Player player(15, worldColliders);
 
-	ExplosiveParticleSystem explosiveParticleSystem;
+	Random360ParticleSystem explosiveParticleSystem;
 	explosiveParticleSystem.AddCollider(boxColliderCrateTop);
 	explosiveParticleSystem.AddCollider(boxColliderCrateBottom);
 

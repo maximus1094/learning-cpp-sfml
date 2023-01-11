@@ -1,13 +1,13 @@
-#include "ExplosiveParticleSystem.h"
+#include "Random360ParticleSystem.h"
 #include "ColorPalette.h"
 #include "Rng.h"
 
-ExplosiveParticleSystem::ExplosiveParticleSystem()
+Random360ParticleSystem::Random360ParticleSystem()
 {
     particles = new Particle[NUMBER_OF_PARTICLES];
 }
 
-ExplosiveParticleSystem::ExplosiveParticleSystem(const ExplosiveParticleSystem& other)
+Random360ParticleSystem::Random360ParticleSystem(const Random360ParticleSystem& other)
 {
     nextSpawnIndex = other.nextSpawnIndex;
     collidersOther = other.collidersOther;
@@ -20,7 +20,7 @@ ExplosiveParticleSystem::ExplosiveParticleSystem(const ExplosiveParticleSystem& 
     }
 }
 
-ExplosiveParticleSystem& ExplosiveParticleSystem::operator=(const ExplosiveParticleSystem& other)
+Random360ParticleSystem& Random360ParticleSystem::operator=(const Random360ParticleSystem& other)
 {
     if (this == &other)
     {
@@ -36,12 +36,12 @@ ExplosiveParticleSystem& ExplosiveParticleSystem::operator=(const ExplosiveParti
     }
 }
 
-ExplosiveParticleSystem::~ExplosiveParticleSystem()
+Random360ParticleSystem::~Random360ParticleSystem()
 {
     delete[] particles;
 }
 
-void ExplosiveParticleSystem::Spawn(Vector2f position, Color color, int size)
+void Random360ParticleSystem::Spawn(Vector2f position, Color color, int size)
 {
     for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
     {
@@ -51,7 +51,7 @@ void ExplosiveParticleSystem::Spawn(Vector2f position, Color color, int size)
     }
 }
 
-int ExplosiveParticleSystem::GetNumberOfParticles()
+int Random360ParticleSystem::GetNumberOfParticles()
 {
     return NUMBER_OF_PARTICLES;
 }

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ExplosiveParticleSystem.h"
+#include "Random360ParticleSystem.h"
 
 class ExplodingParticle : public Particle
 {
 private:
-	ExplosiveParticleSystem explosive;
+	Random360ParticleSystem explosive;
 
 public:
 	void Update(std::vector<Collider> collidersOther) override;
