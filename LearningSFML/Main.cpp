@@ -113,7 +113,7 @@ public:
 
 		Vector2f particleOrigin = Position.Add(mousePlayerDifference);
 
-		ParticleSystem.Spawn(particleOrigin, normalized.Multiply(velocityScale));
+		ParticleSystem.Spawn(particleOrigin, normalized.Multiply(velocityScale), false);
 
 		lastShot = std::chrono::high_resolution_clock::now();
 	}

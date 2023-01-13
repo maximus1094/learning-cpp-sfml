@@ -12,7 +12,7 @@ class Particle
 {
 private:
     sf::RectangleShape rectangle;
-    sf::Vector2f size;
+    sf::Vector2f m_size;
 
     bool isActive;
     float lifeTime;

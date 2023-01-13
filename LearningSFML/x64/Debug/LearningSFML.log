@@ -1,8 +1,38 @@
-﻿  ExplodingParticle.cpp
-  Random360ParticleSystem.cpp
+﻿  Random360ParticleSystem.cpp
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(48,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(48,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(50,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Particle.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(27,33): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(27,27): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(112,30): warning C4244: 'initializing': conversion from '_Rep' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Rep=float
+          ]
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(116,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(117,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\Particle.cpp(118,21): warning C4244: 'initializing': conversion from 'double' to 'sf::Uint8', possible loss of data
+  ParticleSystem.cpp
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(78,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(80,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(80,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(80,80): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(80,77): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(94,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(98,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(98,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(101,17): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(100,17): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
+C:\Workspaces\cpp\LearningSFML\LearningSFML\ParticleSystem.cpp(52): warning C4715: 'ParticleSystem::operator=': not all control paths return a value
 C:\Workspaces\cpp\LearningSFML\LearningSFML\Random360ParticleSystem.cpp(37): warning C4715: 'Random360ParticleSystem::operator=': not all control paths return a value
   LearningSFML.vcxproj -> C:\Workspaces\cpp\LearningSFML\x64\Debug\LearningSFML.exe

@@ -57,7 +57,7 @@ ParticleSystem::~ParticleSystem()
     delete[] explodingParticles;
 }
 
-void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)
+void ParticleSystem::Spawn(Vector2f position, Vector2f velocity, bool spawnExplosive)
 {
     // Spawn explosive particles (bigger), and regular small particles.
     // Explosive particles shouldn't despawn? There will be way more small ones that explosive.
@@ -80,26 +80,29 @@ void ParticleSystem::Spawn(Vector2f position, Vector2f velocity)
         BaseSpawn(position.Subtract(Vector2f(size / 2, size / 2)), Vector2f(x, y), size, color);
     }
 
-    for (int i = 0; i < 3; i++)
+    if (spawnExplosive)
     {
-        // random angle offset
-        double angle = randomnumber(-15, 15);
-        double radians = (angle * pi) / 180;
+        for (int i = 0; i < 3; i++)
+        {
+            // random angle offset
+            double angle = randomnumber(-15, 15);
+            double radians = (angle * pi) / 180;
 
-        double x = velocity.X * std::cos(radians) - velocity.Y * std::sin(radians);
-        double y = velocity.X * std::sin(radians) + velocity.Y * std::cos(radians);
+            double x = velocity.X * std::cos(radians) - velocity.Y * std::sin(radians);
+            double y = velocity.X * std::sin(radians) + velocity.Y * std::cos(radians);
 
-        int size = randomnumber(25, 50);
+            int size = randomnumber(25, 50);
 
-        // Spawning explosive particles.
-        explodingParticles[nextExplosiveSpawnIndex].Spawn(
-            position.Subtract(Vector2f(size / 2, size / 2)),
-            size,
-            x,
-            y,
-            color);
+            // Spawning explosive particles.
+            explodingParticles[nextExplosiveSpawnIndex].Spawn(
+                position.Subtract(Vector2f(size / 2, size / 2)),
+                size,
+                x,
+                y,
+                color);
 
-        nextExplosiveSpawnIndex = nextExplosiveSpawnIndex++ % (NUMBER_OF_EXPLODING_PARTICLES - 1);
+            nextExplosiveSpawnIndex = nextExplosiveSpawnIndex++ % (NUMBER_OF_EXPLODING_PARTICLES - 1);
+        }
     }
 }
 

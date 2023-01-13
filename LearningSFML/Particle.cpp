@@ -11,12 +11,12 @@ Particle::Particle()
     isActive = false;
 
     Position = Vector2f(0, 0);
-    size = sf::Vector2f(50, 50);
+    m_size = sf::Vector2f(50, 50);
 
     StartColor = ColorPalette().GetRandomColor();
     EndColor = ColorPalette().White;
 
-    rectangle.setSize(size);
+    rectangle.setSize(m_size);
     rectangle.setFillColor(sf::Color(StartColor.R, StartColor.G, StartColor.B));
 }
 
@@ -24,9 +24,10 @@ void Particle::Spawn(Vector2f position, int size, float xVelocity, float yVeloci
 {
     Position = position;
     StartColor = color;
+    m_size = sf::Vector2f(size, size);
 
     rectangle.setPosition(sf::Vector2f(position.X, position.Y));
-    rectangle.setSize(sf::Vector2f(size, size));
+    rectangle.setSize(m_size);
     velocity = sf::Vector2f(xVelocity, yVelocity);
 
     rectangle.setFillColor(sf::Color(StartColor.R, StartColor.G, StartColor.B));
@@ -56,20 +57,20 @@ void Particle::Update(std::vector<Collider> collidersOther)
 
             if (velocity.x > 0 &&
                 // crossing x moving right
-                Position.X + size.x > c.xPosition &&
+                Position.X + m_size.x > c.xPosition &&
                 Position.X < c.xPosition &&
                 
                 // within y bounds
-                Position.Y + size.y > c.yPosition &&
+                Position.Y + m_size.y > c.yPosition &&
                 Position.Y < c.yPosition + c.size ||
                 
                 velocity.x < 0 &&
                 // crossing x moving left
                 Position.X < c.xPosition + c.size &&
-                Position.X + size.x > c.xPosition + c.size &&
+                Position.X + m_size.x > c.xPosition + c.size &&
                 
                 // within y bounds
-                Position.Y + size.y > c.yPosition&&
+                Position.Y + m_size.y > c.yPosition&&
                 Position.Y < c.yPosition + c.size)
             {
                 OnCollision(true);
@@ -79,20 +80,20 @@ void Particle::Update(std::vector<Collider> collidersOther)
 
             if (velocity.y > 0 &&
                 // crossing y moving bottom
-                Position.Y + size.y > c.yPosition &&
+                Position.Y + m_size.y > c.yPosition &&
                 Position.Y < c.yPosition &&
 
                 // within x bounds
-                Position.X + size.x > c.xPosition &&
+                Position.X + m_size.x > c.xPosition &&
                 Position.X < c.xPosition + c.size ||
 
                 velocity.y < 0 &&
                 // crossing y moving top
                 Position.Y < c.yPosition + c.size &&
-                Position.Y + size.y > c.yPosition + c.size &&
+                Position.Y + m_size.y > c.yPosition + c.size &&
 
                 // within x bounds
-                Position.X + size.x > c.xPosition &&
+                Position.X + m_size.x > c.xPosition &&
                 Position.X < c.xPosition + c.size)
             {
                 OnCollision(false);

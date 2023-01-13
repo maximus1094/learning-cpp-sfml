@@ -24,7 +24,7 @@ public:
     // Destructor
     ~ParticleSystem();
 
-    void Spawn(Vector2f position, Vector2f velocity);
+    void Spawn(Vector2f position, Vector2f velocity, bool spawnExplosive);
 
     void Update() override;
 
